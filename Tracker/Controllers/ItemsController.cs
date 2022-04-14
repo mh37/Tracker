@@ -23,7 +23,8 @@ namespace Tracker.Controllers
         // GET: Items
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Item.ToListAsync());
+            var applicationDbContext = _context.Item.Include(i => i.Category);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Items/Details/5
@@ -35,6 +36,7 @@ namespace Tracker.Controllers
             }
 
             var item = await _context.Item
+                .Include(i => i.Category)
                 .FirstOrDefaultAsync(m => m.ItemId == id);
             if (item == null)
             {
@@ -47,6 +49,7 @@ namespace Tracker.Controllers
         // GET: Items/Create
         public IActionResult Create()
         {
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryId");
             return View();
         }
 
@@ -55,7 +58,7 @@ namespace Tracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItemId,ItemName,Details,CreatedDate")] Item item)
+        public async Task<IActionResult> Create([Bind("ItemId,ItemName,Details,CreatedDate,CategoryId")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -63,6 +66,7 @@ namespace Tracker.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryId", item.CategoryId);
             return View(item);
         }
 
@@ -79,6 +83,7 @@ namespace Tracker.Controllers
             {
                 return NotFound();
             }
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryId", item.CategoryId);
             return View(item);
         }
 
@@ -87,7 +92,7 @@ namespace Tracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ItemId,ItemName,Details,CreatedDate")] Item item)
+        public async Task<IActionResult> Edit(int id, [Bind("ItemId,ItemName,Details,CreatedDate,CategoryId")] Item item)
         {
             if (id != item.ItemId)
             {
@@ -114,6 +119,7 @@ namespace Tracker.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryId", item.CategoryId);
             return View(item);
         }
 
@@ -126,6 +132,7 @@ namespace Tracker.Controllers
             }
 
             var item = await _context.Item
+                .Include(i => i.Category)
                 .FirstOrDefaultAsync(m => m.ItemId == id);
             if (item == null)
             {
