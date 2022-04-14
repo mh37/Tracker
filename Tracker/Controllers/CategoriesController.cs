@@ -141,6 +141,13 @@ namespace Tracker.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var category = await _context.Category.FindAsync(id);
+
+            //severing connection to prevent issues with cascading delete
+            /*foreach (var item in category.Items)
+            {
+                item.Category = null;
+            }*/
+
             _context.Category.Remove(category);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
