@@ -12,5 +12,6 @@ namespace Tracker.Data
         }
         public DbSet<Tracker.Models.Item> Item { get; set; }
         public DbSet<Tracker.Models.Category> Category { get; set; }
+
     }
 }

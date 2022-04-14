@@ -143,10 +143,18 @@ namespace Tracker.Controllers
             var category = await _context.Category.FindAsync(id);
 
             //severing connection to prevent issues with cascading delete
-            /*foreach (var item in category.Items)
+            using var context = _context;
+            var c = context.Category.OrderBy(c => c.CategoryName).Include(c => c.Items).First();
+
+            foreach (var i in c.Items)
             {
-                item.Category = null;
-            }*/
+                i.Category = null;
+            }
+
+            context.SaveChanges();
+            
+
+
 
             _context.Category.Remove(category);
             await _context.SaveChangesAsync();
