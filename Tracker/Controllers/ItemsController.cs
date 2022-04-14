@@ -83,7 +83,7 @@ namespace Tracker.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryId", item.CategoryId);
+            ViewData["CategoryId"] = new SelectList(_context.Category, "CategoryId", "CategoryName", item.CategoryId);
             return View(item);
         }
 
