@@ -4,9 +4,9 @@
     ViewData["Title"] = "Index";
 }
 
-<p>
-    <a asp-action="Create">New Item</a>
-</p>
+
+<input type="button" class="btn btn-primary" value="Add Item" onclick="location.href='@Url.Action("Create", "Items")'" />
+
 <table class="table">
     <thead>
         <tr>
