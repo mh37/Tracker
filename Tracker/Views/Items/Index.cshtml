@@ -4,8 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
+<a class="waves-effect waves-light btn" asp-area="" asp-controller="Items" asp-action="Create">Add</a>
 
-<input type="button" class="btn btn-primary" value="Add Item" onclick="location.href='@Url.Action("Create", "Items")'" />
 
 <table class="table">
     <thead>
@@ -41,9 +41,9 @@
                 @Html.DisplayFor(modelItem => item.Category.CategoryName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ItemId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ItemId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ItemId">Delete</a>
+                <a class="btn-floating btn-small waves-effect waves-light blue" asp-action="Edit" asp-route-id="@item.ItemId"><i class="material-icons">edit</i></a>
+                <a class="btn-floating btn-small waves-effect waves-light blue" asp-action="Details" asp-route-id="@item.ItemId"><i class="material-icons">list</i></a>
+                <a class="btn-floating btn-small waves-effect waves-light red" asp-action="Delete" asp-route-id="@item.ItemId"><i class="material-icons">delete</i></a>
             </td>
         </tr>
 }

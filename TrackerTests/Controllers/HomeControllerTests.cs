@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
 
 namespace Tracker.Controllers.Tests
 {
@@ -14,26 +16,18 @@ namespace Tracker.Controllers.Tests
         [TestMethod()]
         public void HomeControllerTest()
         {
-            Assert.Fail();
+            var controller = new HomeController(null);
+            Assert.IsNotNull(controller);
+
         }
 
         [TestMethod()]
-        public void IndexTest()
+        public void IndexIsNotNullAndNotEqualsNotFoundTest()
         {
-            Assert.Fail();
+            var controller = new HomeController(null);
+            var result = controller.Index() as ViewResult;
+            Assert.AreNotEqual("NotFound", result.ViewName);
+            Assert.IsNotNull(result.ViewData);
         }
-
-        [TestMethod()]
-        public void ErrorTest()
-        {
-            Assert.Fail();
-        }
-    }
-}
-
-namespace TrackerTests.Controllers
-{
-    internal class HomeControllerTests
-    {
     }
 }

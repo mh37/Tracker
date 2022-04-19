@@ -4,13 +4,16 @@
     ViewData["Title"] = "Details";
 }
 
-<h4>Item Details</h4>
+<h4>
+    <a class="btn-floating btn-medium waves-effect waves-light blue" asp-action="Index"><i class="material-icons">arrow_back</i></a>
+    Item Details
+</h4>
 
 <div>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ItemName)
+            Name
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.ItemName)
@@ -22,7 +25,7 @@
             @Html.DisplayFor(model => model.Details)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedDate)
+            Date
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.CreatedDate)
@@ -31,11 +34,11 @@
             @Html.DisplayNameFor(model => model.Category)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Category.CategoryId)
+            @Html.DisplayFor(model => model.Category.CategoryName)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.ItemId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.ItemId">Edit</a> 
+    
 </div>
