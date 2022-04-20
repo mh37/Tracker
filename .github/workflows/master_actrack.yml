@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'actrack'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E3F7174F305D4554A51D61A4FF06636D }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B3FD5948D16A4060A544C66E0FEF8FB7 }}
           package: .
